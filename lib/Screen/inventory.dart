@@ -437,8 +437,7 @@ class _ProductPageState extends State<ProductPage> {
                 // Validate inputs
                 if (sizeController.text.isEmpty ||
                     stockController.text.isEmpty ||
-                    priceController.text.isEmpty ||
-                    reorderPointController.text.isEmpty) {
+                    priceController.text.isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text('Please fill all fields')),
                   );
@@ -447,14 +446,11 @@ class _ProductPageState extends State<ProductPage> {
 
                 final newStock = int.parse(stockController.text);
                 final newPrice = double.parse(priceController.text);
-                final newReorderPoint = int.parse(reorderPointController.text);
 
                 // Determine initial status
                 ProductStatus initialStatus;
                 if (newStock == 0) {
                   initialStatus = ProductStatus.outOfStock;
-                } else if (newStock <= newReorderPoint) {
-                  initialStatus = ProductStatus.lowStock;
                 } else {
                   initialStatus = ProductStatus.inStock;
                 }
